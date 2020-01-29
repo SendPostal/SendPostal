@@ -67,7 +67,7 @@ curl --request POST \
 		"address": "12520 Wilkie Ave, Gardena, CA 90249",
 		"countryCode": "US"
 	}
-}'
+}
 ```
 
 The response from the API will contain the cost of sending the letter, the remaining credit, a link to the PDF being sent and the urls of the thumbnails of the PDF for preview.
@@ -76,11 +76,11 @@ The response also contains the `sendUrl` that can be use to send the letter late
 
 **Example Response**
 
-```json
+```js
 {
-	"letterId": "34g7h8-4s68dfs-997j55f77d5",
-	"status": "readyToSend",
-	"color": false,
+    "letterId": "34g7h8-4s68dfs-997j55f77d5",
+    "status": "readyToSend",
+    "color": false,
     "sender": {
     	"name": "Elon Musk",
     	"organization": "SpaceX",
@@ -120,11 +120,11 @@ curl --request POST \
 
 If successfull, this second request will receive this response
 
-```json
+```js
 {
-	"letterId": "34g7h8-4s68dfs-997j55f77d5",
-	"status": "sent",
-	"color": false,
+    "letterId": "34g7h8-4s68dfs-997j55f77d5",
+    "status": "sent",
+    "color": false,
     "sender": {
     	"name": "Elon Musk",
     	"organization": "SpaceX",
@@ -173,7 +173,7 @@ curl --request POST \
 		"address": "12520 Wilkie Ave, Gardena, CA 90249",
 		"countryCode": "US"
 	}
-}'
+}
 ```
 
 **Example Multipart Form Request**
@@ -193,16 +193,16 @@ curl --request POST \
   --form recipientOrganization=SpaceX \
   --form recipientAddress=12520 Wilkie Ave, Gardena, CA 90249 \
   --form recipientCountryCode=US
-}'
+}
 ```
 
 **Example Response**
 
-```json
+```js
 {
-	"letterId": "34g7h8-4s68dfs-997j55f77d5",
-	"status": "sent",
-	"color": false,
+    "letterId": "34g7h8-4s68dfs-997j55f77d5",
+    "status": "sent",
+    "color": false,
     "sender": {
     	"name": "Elon Musk",
     	"organization": "SpaceX",
@@ -236,7 +236,7 @@ Endpoint: `api.sendpostal.io/upload`
 
 Method: `POST`
 
-###Multipart form request
+### Multipart form request
 	
 | Request Header |           Value        | Required|
 |----------------|:----------------------:|:--------:| 
@@ -260,7 +260,7 @@ Method: `POST`
 | `recipientCountryCode` |  Country code of the recipient | see `Country Codes` | none | true | `US`
 
 
-###JSON request
+### JSON request
 
 
 | Request Header |        Value        | Required | 
@@ -274,8 +274,8 @@ Method: `POST`
 | `document` |  Path of the PDF file to send | `Document` see bellow | none | true | `/tmp/fileToSend.pdf`
 | `send` |  Send the letter directly | Boolean | `false` | true | `true`
 | `color` |  Print PDF in color | Number (`1` for color `0` for black and white) | `0` (no color) | true | 1
-| `sender` |  sender as a JSON object | `Contact` see below | {} | false | <pre align="left" lang="json">{<br>  "name": "Elon Musk",<br>  "organization": "SpaceX",<br>  "address": "12520 Wilkie Ave, Gardena, CA 90249",<br>  "countryCode": "US",<br>}</pre>
-| `recipient` |  recipient as a JSON object | `Contact` see below | {} | true |<pre align="left" lang="json">{<br>  "name": "Elon Musk",<br>  "organization": "SpaceX",<br>  "address": "12520 Wilkie Ave, Gardena, CA 90249",<br>  "countryCode": "US"<br>}</pre>
+| `sender` |  sender as a JSON object | `Contact` see below | {} | false | ``` { "name": "Elon Musk", "organization": "SpaceX", "address": "12520 Wilkie Ave, Gardena, CA 90249", "countryCode": "US" }```
+| `recipient` |  recipient as a JSON object | `Contact` see below | {} | true |``` { "name": "Elon Musk", "organization": "SpaceX", "address": "12520 Wilkie Ave, Gardena, CA 90249", "countryCode": "US" }```
 
 
 ## Send Letter Request
@@ -310,7 +310,7 @@ Method: `POST`
 
 ## Types
 
-###Contact
+### Contact
 
 A contact is a JSON object containing the information of the sender or the recipient of a letter.
 
@@ -323,7 +323,7 @@ A contact is a JSON object containing the information of the sender or the recip
 
 Example
 
-```json
+```js
 {
 	"name": "Elon Musk",
 	"organization": "SpaceX",
@@ -333,7 +333,7 @@ Example
 ```
 
 
-###Document
+### Document
 
 A document is a JSON object that contains a `type` to determine the source of the document and other fields depending on the type detailed bellow.
 
@@ -377,7 +377,7 @@ Example
 }
 ```
 
-###Country Code
+### Country Code
 
 
 Get the JSON file containing the list of the supported country codes [here](./countries.json)
