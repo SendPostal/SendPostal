@@ -1,15 +1,24 @@
-# Get your API key
+# SendPostal API documentation
 
-Click on this link to generate your API key
+#### Send postal letters online with the SendPostal API or with the web app [sendpostal.io](https://app.sendpostal.io)
 
+# Guide
 
-# Send a letter
+## Get your API key
+
+- Create an account on [app.sendpostal.io](https://app.sendpostal.io/account)
+- Click `Generate API key`
+- Replace `<YOUR API KEY>` in the documentation below with your API key
+
+## Send a letter
 
 You can send a letter directly or get a quote and preview before sending
 
 ### Send in two steps
 
-#### Step 1
+First upload the file to get a quote and then send it.
+
+#### Step 1: Upload the file
 
 Send a first POST request to the `upload` api endpoint with the parameter `send` set to `false` for JSON and `0` for Multipart Form to prevent the letter from being sent directly.
 
@@ -18,7 +27,7 @@ Send a first POST request to the `upload` api endpoint with the parameter `send`
 ```shell
 curl --request POST \
   --url https://api.sendpostal.io/upload \
-  --header 'authorization: Bearer NlIjp7Imlkzb243NEBNTHYulgECl56vxLuy2LjPocOJ' \
+  --header 'authorization: Bearer <YOUR API KEY>' \
   --header 'content-type: multipart/form-data' \
   --form file=/tmp/pdfToSend.pdf \
   --form send=0 \
@@ -29,7 +38,6 @@ curl --request POST \
   --form recipientName=Elon Musk \
   --form recipientOrganization=SpaceX \
   --form recipientAddress=12520 Wilkie Ave, Gardena, CA 90249 \
-  --form recipientCountry=United States \
   --form recipientCountryCode=US
 ```
 
@@ -38,7 +46,7 @@ curl --request POST \
 ```shell
 curl --request POST \
   --url https://api.sendpostal.io/upload \
-  --header 'authorization: Bearer NlIjp7Imlkzb243NEBNTHYulgECl56vxLuy2LjPocOJ' \
+  --header 'authorization: Bearer <YOUR API KEY>' \
   --header 'content-type: application/json' \
   --data '{
 	"document": {
@@ -98,16 +106,16 @@ The response also contains the `sendUrl` that can be use to send the letter late
 }
 ```
 
-#### Step 2
+#### Step 2: Send the file
 
-To send the letter send a POST request to the url contained in the `sendUrl` field with your token in the `authorization` header as follow
+Send a POST request to the url contained in the `sendUrl` field with your token in the `authorization` header as follow
 
 **Example send letter request**
 
 ```shell
 curl --request POST \
   --url https://api.sendpostal.io/send/34g7h8-4s68dfs-997j55f77d5 \
-  --header 'authorization: Bearer NlIjp7Imlkzb243NEBNTHYulgECl56vxLuy2LjPocOJ'
+  --header 'authorization: Bearer <YOUR API KEY>'
 ```
 
 If successfull, this second request will receive this response
@@ -135,7 +143,7 @@ If successfull, this second request will receive this response
 
 ### Send the letter directly
 
-To send the letter directly without getting a quote first, send a POST request to the `upload` api endpoint with the `send` field set to `true` in JSON and `1` in Multipart Form.
+To send the letter directly without getting a quote first, send a `POST` request to the `https://api.sendpostal.io/upload` api endpoint with the `send` field set to `true` in JSON and `1` in Multipart Form.
 
 This will upload and send the letter directly.
 
@@ -144,7 +152,7 @@ This will upload and send the letter directly.
 ```shell
 curl --request POST \
   --url https://api.sendpostal.io/upload \
-  --header 'authorization: Bearer NlIjp7Imlkzb243NEBNTHYulgECl56vxLuy2LjPocOJ' \
+  --header 'authorization: Bearer <YOUR API KEY>' \
   --header 'content-type: application/json' \
   --data '{
 	"document": {
@@ -165,6 +173,26 @@ curl --request POST \
 		"address": "12520 Wilkie Ave, Gardena, CA 90249",
 		"countryCode": "US"
 	}
+}'
+```
+
+**Example Multipart Form Request**
+
+```shell
+curl --request POST \
+  --url https://api.sendpostal.io/upload \
+  --header 'authorization: Bearer <YOUR API KEY>' \
+  --header 'content-type: multipart/form-data' \
+  --form file=/tmp/pdfToSend.pdf \
+  --form send=1 \
+  --form color=0 \
+  --form senderName=Elon Musk \
+  --form senderOrganization=SpaceX \
+  --form senderAddress=12520 Wilkie Ave, Gardena, CA 90249 \
+  --form recipientName=Elon Musk \
+  --form recipientOrganization=SpaceX \
+  --form recipientAddress=12520 Wilkie Ave, Gardena, CA 90249 \
+  --form recipientCountryCode=US
 }'
 ```
 
@@ -213,7 +241,7 @@ Method: `POST`
 | Request Header |           Value        | Required|
 |----------------|:----------------------:|:--------:| 
 | `Content-Type` |  `multipart/form-data` | true |
-| `Authorization` |  `Bearer <YOUR API TOKEN>` | true | 
+| `Authorization` |  `Bearer <YOUR API KEY>` | true | 
 	
 	
 
@@ -258,7 +286,7 @@ Method: `POST`
 
 | Request Header |        Value        | Required | 
 |----------------|:-------------------:|:--------:| 
-| `Authorization` |  `Bearer <YOUR API TOKEN>` | true | 
+| `Authorization` |  `Bearer <YOUR API KEY>` | true | 
 
 
 ## Upload or Send Letter Response
@@ -345,17 +373,14 @@ Example
 {
 	"type": "googleDoc",
 	"googleDocId": "https://docs.google.com/document/d/3dqdMsqWX_orBfG_6UQsdfwm-YYQqsdGONmwg4",
-	"googleDocToken": "sFRSdsqWXYYQqssFRSdsqWXYYQqsdGON633mwq44dGON633mwq4 sFRSdsqWXYYQqsdGON633mwq1204"
+	"googleDocToken": "sFRSdsqWXYYQqssFRSdsqWXYYQqsdG33mwq44dGON633mwq4sFRSdsqWXYYQqsdGON633mwq1204"
 }
 ```
 
 ###Country Code
 
-List of the supported country codes
 
-| Country | CountryCode |
-|------|:-------:|
-| France | `FR ` 
+Get the JSON file containing the list of the supported country codes [here](./countries.json)
 
 
 ## Errors
