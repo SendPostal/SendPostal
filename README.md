@@ -67,7 +67,7 @@ curl --request POST \
 		"address": "12520 Wilkie Ave, Gardena, CA 90249",
 		"countryCode": "US"
 	}
-}
+}'
 ```
 
 The response from the API will contain the cost of sending the letter, the remaining credit, a link to the PDF being sent and the urls of the thumbnails of the PDF for preview.
@@ -173,7 +173,7 @@ curl --request POST \
 		"address": "12520 Wilkie Ave, Gardena, CA 90249",
 		"countryCode": "US"
 	}
-}
+}'
 ```
 
 **Example Multipart Form Request**
