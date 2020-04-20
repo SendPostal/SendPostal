@@ -284,7 +284,7 @@ Method: `POST`
 | `sender`           |   sender as a JSON object    |              `Contact` see below               |       {}       |  false   | `{ "name": "Elon Musk", "organization": "SpaceX", "address": "12520 Wilkie Ave, Gardena, CA 90249", "countryCode": "US" }` |
 | `recipient`        |  recipient as a JSON object  |              `Contact` see below               |       {}       |   true   | `{ "name": "Elon Musk", "organization": "SpaceX", "address": "12520 Wilkie Ave, Gardena, CA 90249", "countryCode": "US" }` |
 
-## Update Letter Request
+## Create Letter Request
 
 Endpoint: `api.sendpostal.io/letters/<ID OF THE LETTER TO SEND>`
 
@@ -338,7 +338,7 @@ Method: `POST`
 | ------------------- | :----------:| :---:|
 | `countryCode`       | Destination country code | ISO 3166-1 alpha-2 `Country Code` see below |
 | `color`             | Whether the letter is set to be printed in color| Number (`1` for color `0` for black and white)|
-| `pageCount`         | Number of page to send | `Number`                                                                                                             
+| `pageCount`         | Number of page to send | Number                                                                                                             
 
 ## Letter Quote Response
 
@@ -348,7 +348,7 @@ Method: `POST`
 | `currency`         | Currency (only `USD` is supported at the moment) | ISO 4217 (e.g. `USD`)    
 | `countryCode`       | Destination country code | ISO 3166-1 alpha-2 `Country Code` see below |
 | `color`             | Whether the letter is set to be printed in color| Number (`1` for color `0` for black and white)|
-| `pageCount`         | Number of page to send | `Number` 
+| `pageCount`         | Number of page to send | Number
 
 ## Types
 
@@ -397,7 +397,6 @@ Example
 {
     "type": "documentUrl",
     "fileUrl": "https://api.xero.com/file/234234",
-    // optionally give the access token needed to get the file
     "fileAccessToken": "sqWXYYQqsdG33mwq44dGON633mwq4sFRSdsqWXYYQqsdGON633mwq12" 
 }
 ```
